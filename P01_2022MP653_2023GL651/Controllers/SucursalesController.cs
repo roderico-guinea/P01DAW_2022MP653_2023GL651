@@ -56,5 +56,33 @@ namespace P01_2022MP653_2023GL651.Controllers
             await _context.SaveChangesAsync();
             return NoContent();
         }
+
+        [HttpGet("reservados/{fecha}")]
+        public async Task<ActionResult<IEnumerable<Reserva>>> GetReservasPorDia(DateTime fecha)
+        {
+            var reservas = await _context.Reservas
+                .Where(r => r.Fecha == fecha)
+                .ToListAsync();
+
+            return reservas;
+        }
+       
+        [HttpGet("reservados/{sucursalId}/{fechaInicio}/{fechaFin}")]
+        public async Task<ActionResult<IEnumerable<Reserva>>> GetReservasPorRango(int sucursalId, DateTime fechaInicio, DateTime fechaFin)
+        {
+            var reservas = await _context.Reservas
+                .Where(r => r.Fecha >= fechaInicio && r.Fecha <= fechaFin)
+                .Join(_context.EspaciosParqueo,
+                    reserva => reserva.EspacioId,
+                    espacio => espacio.Id,
+                    (reserva, espacio) => new { reserva, espacio })
+                .Where(x => x.espacio.SucursalId == sucursalId)
+                .Select(x => x.reserva)
+                .ToListAsync();
+
+            return reservas;
+        }
+
+
     }
 }
