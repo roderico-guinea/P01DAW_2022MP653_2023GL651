@@ -5,8 +5,8 @@
         public int Id { get; set; }
         public int SucursalId { get; set; }
         public int Numero { get; set; }
-        public string Ubicacion { get; set; }
+        public string? Ubicacion { get; set; }
         public decimal CostoPorHora { get; set; }
-        public string Estado { get; set; }
+        public string? Estado { get; set; }
     }
 }
