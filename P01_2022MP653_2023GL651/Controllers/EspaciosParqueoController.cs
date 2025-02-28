@@ -36,7 +36,7 @@ public class EspaciosParqueoController : ControllerBase
         if (espacio == null) return NotFound();
         return espacio;
     }
-
+ 
     [HttpPost]
     public async Task<ActionResult<EspacioParqueo>> CreateEspacioParqueo(EspacioParqueo espacio)
     {
