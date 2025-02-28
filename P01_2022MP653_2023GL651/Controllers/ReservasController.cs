@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using P01_2022MP653_2023GL651.Models;
 namespace P01_2022MP653_2023GL651.Controllers
 {
     [Route("api/[controller]")]
