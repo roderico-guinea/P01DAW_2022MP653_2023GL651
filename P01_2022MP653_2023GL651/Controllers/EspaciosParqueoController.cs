@@ -13,6 +13,16 @@ public class EspaciosParqueoController : ControllerBase
         _context = context;
     }
 
+    [HttpGet("disponibles/{fecha}")]
+    public async Task<ActionResult<IEnumerable<EspacioParqueo>>> GetEspaciosDisponibles(DateTime fecha)
+    {
+        var espaciosDisponibles = await _context.EspaciosParqueo
+            .Where(e => e.Estado == "Disponible")
+            .ToListAsync();
+
+        return espaciosDisponibles;
+    }
+
     [HttpGet]
     public async Task<ActionResult<IEnumerable<EspacioParqueo>>> GetEspaciosParqueo()
     {
